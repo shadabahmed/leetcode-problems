@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/implement-strstr/
+
 def str_str(haystack, needle)
   return -1 if haystack.empty? || needle.empty?
   needle_idx = 0
@@ -17,7 +19,7 @@ end
 
 # If chars match then advance both i and j. If not then update j from match table if j != 0
 def str_str(text, pattern)
-  return if pattern.empty?
+  return 0 if pattern.empty?
   i = 0
   j = 0
   pmt = partial_match_table(pattern)
@@ -60,5 +62,9 @@ def partial_match_table(str)
   pmt
 end
 
-str_str 'ababac', 'bab'
-str_str "mississippi", "issip"
+p str_str 'ababac', 'bab'
+p str_str "mississippi", "issip"
+
+p str_str "", ""
+
+p str_str "dsds", ""

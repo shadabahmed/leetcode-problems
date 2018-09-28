@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/valid-parentheses/
+
 def is_valid(s)
   stack = []
   s.each do |c|

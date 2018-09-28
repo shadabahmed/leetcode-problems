@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
 def remove_nth_from_end(head, n)
   fast_ptr = head
   while n > 0

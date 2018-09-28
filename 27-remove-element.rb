@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/remove-element/
+
 def remove_element(nums, val)
   l, h = 0, 0
   while h <= nums.length

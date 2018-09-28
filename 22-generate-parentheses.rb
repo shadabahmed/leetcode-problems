@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/generate-parentheses/
+
 def generate_parenthesis(n, stack = [], balance_count = 0, res = [])
   return res.push(stack.join) if n == 0 && balance_count == 0
   return res if balance_count < 0 || n == 0

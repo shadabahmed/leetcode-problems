@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
 def remove_duplicates(nums)
   l, h = 0, 0
   while h < nums.length
