@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
 class TreeNode
   attr_accessor :val, :left, :right
   def initialize(val)
@@ -26,9 +28,46 @@ def kth_smallest(root, k)
   kth_smallest_helper(root, k)[0]
 end
 
+def kth_smallest(root, k)
+  left_stack = [root]
+  right_stack = []
+  res = []
+  while true
+    return res.last if res.size == k
+    if !left_stack.empty?
+      node = left_stack.pop
+      left_stack.push(node.left) if node.left
+      right_stack.push(node)
+    elsif !right_stack.empty?
+      node = right_stack.pop
+      left_stack.push(node.right) if node.right      
+      res.push(node.val)
+    end
+  end
+  res
+end
+
+def kth_smallest(root, k)
+  stack = []
+  node = nil
+  res = nil
+  while true
+    while root
+      stack.push(root)
+      root = root.left
+    end
+    root = stack.pop
+    k -= 1
+    return root.val if k.zero?
+    root = root.right
+  end
+  res
+end
+
+
 root = TreeNode.new(3)
 root.left = TreeNode.new(1)
 root.left.right = TreeNode.new(2)
 root.right = TreeNode.new(4)
 
-kth_smallest(root, 1)
+p kth_smallest(root, 1)
