@@ -62,3 +62,27 @@ def inorder_traversal(root)
   end
   res
 end
+
+
+def inorder_traversal(root)
+  current, res = root, []
+  while current
+    if current.left
+      pred = current.left      
+      while pred.right && pred.right != current
+        pred = pred.right
+      end
+      if pred.right == current
+        res << current.val
+        current = current.right
+      else
+        pred.right = current
+        current = current.left
+      end
+    else
+      res << current.val
+      current = current.right
+    end
+  end
+  res
+end

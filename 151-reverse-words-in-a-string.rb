@@ -26,3 +26,27 @@ def reverse_words(str)
 end
 
 reverse_words ' shadab     ahmed '
+
+
+# @param {String} s
+# @return {String}
+def reverse_words(s)
+  words = []
+  idx = s.length - 1
+  while idx >= 0
+    idx -= 1 while idx >= 0 && s[idx] == ' '
+    break if idx < 0
+    end_idx = idx
+    idx -= 1 while idx >= 0 && s[idx] != ' '
+    start_idx = idx + 1
+    words << s[start_idx..end_idx]
+  end 
+  words.join(' ')  
+end
+
+def reverse_words(s)
+  s.split(' ').compact.reverse.join(' ')
+end
+
+p reverse_words "the sky is blue"
+p reverse_words "  hello world!  "

@@ -7,3 +7,6 @@ def climb_stairs(n)
   end
   table.last
 end
+
+
+p climb_stairs 5

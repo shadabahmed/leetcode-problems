@@ -15,4 +15,10 @@ class Tree
     node.right = Tree.create(arr, 2 * idx + 2)
     node
   end
+
+  def serialize(root)
+    res = []
+    return res if root.nil?
+    queue = []
+  end
 end

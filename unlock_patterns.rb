@@ -25,3 +25,6 @@ def next_key(current, selected)
   end
 
 end
+KEY_MAP = {
+  1 => {2 => 0, 3 => 2, 4 => 0, 5 => 0, 6 => }
+}

@@ -43,3 +43,46 @@ def reverse(head)
     current = next_node
   end
 end
+
+
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val)
+#         @val = val
+#         @next = nil
+#     end
+# end
+
+# @param {ListNode} head
+# @param {Integer} k
+# @return {ListNode}
+def reverse_k_group(head, k)
+  return nil if head.nil?
+  tail = head
+  n = k
+  while n > 1 && tail.next
+    tail = tail.next
+    n -= 1
+  end
+  if n == 1
+    next_head = tail.next
+    tail.next = nil  
+    reverse_list(head)
+    head.next = reverse_k_group(next_head, k)
+    tail
+  else
+    head
+  end  
+end
+
+def reverse_list(head)
+  prev_node, current_node = nil, head
+  while current_node
+    next_node = current_node.next
+    current_node.next = prev_node
+    prev_node = current_node
+    current_node = next_node
+  end
+  prev_node
+end

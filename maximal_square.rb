@@ -35,3 +35,27 @@ p maximal_square [%w[1 0 1 1 1],
                   %w[1 0 1 1 1],
                   %w[1 1 1 1 1],
                   %w[1 0 0 1 0]]
+
+
+# @param {Character[][]} matrix
+# @return {Integer}
+def maximal_square(matrix)
+  max_matrix = (matrix.length + 1).times.collect { (matrix.first.length + 1).times.collect { 0 }}
+  largest_side = 0
+  1.upto(matrix.length) do |row|
+    1.upto(matrix.first.length) do |col|
+      next if matrix[row - 1][col - 1] == '0'
+      max_matrix[row][col] = [max_matrix[row - 1][col - 1], max_matrix[row - 1][col], max_matrix[row][col - 1]].min + 1
+      largest_side = max_matrix[row][col] if max_matrix[row][col] > largest_side
+    end
+  end
+  largest_side * largest_side
+end
+
+#p maximal_square [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+
+p maximal_square [["0","0","0","1"],
+                  ["1","1","0","1"],
+                  ["1","1","1","1"],
+                  ["0","1","1","1"],
+                  ["0","1","1","1"]]
