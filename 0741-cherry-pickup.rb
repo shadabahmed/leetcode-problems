@@ -54,4 +54,37 @@ def cherry_pickup(grid)
 end
 
 
+def get_dp_matrix(grid)
+  (grid.length + 1).times.collect do 
+    (grid.first.length + 1).times.collect do
+      (grid.length + 1).times.collect do
+        (grid.first.length + 1).times.collect do 
+          0
+        end
+      end
+    end
+  end
+end
+
+def cherry_pickup(grid)
+  dp = get_dp_matrix(grid)
+  1.upto(grid.length) do |row1|
+    1.upto(grid.first.length) do |col1|
+      1.upto(grid.length) do |row2|
+        1.upto(grid.first.length) do |col2|
+          cell_val1 = grid[row1 - 1][col1 - 1]
+          cell_val2 = grid[row2 - 1][col2 - 1]
+          if cell_val1 >= 0 && cell_val2 >= 0
+            dp[row][col][row][col] = [dp[row1 - 1][col1][0][0], dp[row1][col1 - 1][0][0]].max
+
+                          
+          end
+          dp[row1][col1][row2][col2] += cell_val1 + cell_val2
+        end
+      end      
+    end
+  end
+  dp[grid.length][grid.first.length][grid.length][grid.first.length]
+end
+
 p cherry_pickup [[1,1,1,1,0,0,0],[0,0,0,1,0,0,0],[0,0,0,1,0,0,1],[1,0,0,1,0,0,0],[0,0,0,1,0,0,0],[0,0,0,1,0,0,0],[0,0,0,1,1,1,1]]

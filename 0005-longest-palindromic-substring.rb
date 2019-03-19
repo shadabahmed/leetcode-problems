@@ -32,7 +32,7 @@ def longest_palindrome(s)
         if pal_length > longest
           longest_idx = idx
           longest = pal_length
-          idx +
+          idx += 1
         end
     end
     if longest % 2 == 0
@@ -41,6 +41,50 @@ def longest_palindrome(s)
       s.slice(longest_idx - (longest - 1)/2, longest)
     end
 end
-p odd_palindrome_length('babad', 1)
+# p odd_palindrome_length('babad', 1)
 
 %w[babad].each {|s| p longest_palindrome(s)}
+
+class Trie
+  def initialize
+    @root = {}
+  end
+
+  def insert(s)
+    parent = @root
+    s.each_char do |c|
+      parent[c] ||= {}
+      parent = parent[c]
+    end
+  end
+
+  def search(s, idx)
+    parent = @root
+    match_length = 0
+    while idx < s.length && parent[s[idx]]
+      parent = parent[s[idx]]
+      idx += 1
+      match_length += 1
+    end
+    match_length
+  end
+end
+
+
+def longest_palindrome(s)
+  trie = Trie.new
+  max_len, max_palindrome = 0, ''
+  (s.length - 1).downto(0) do |idx|
+    trie.insert(s[0..idx].reverse)
+  end 
+  0.upto(s.length - 1) do |idx|
+    match_len = trie.search(s, idx)
+    if match_len > max_len
+      max_len = match_len
+      max_palindrome = s.slice(idx, match_len)
+    end
+  end
+  max_palindrome
+end
+
+p longest_palindrome 'babad'

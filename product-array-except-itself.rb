@@ -17,4 +17,46 @@ def product_except_self(nums)
   prods
 end
 
-p product_except_self [2,3,5,0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @param {Integer[]} nums
+# @return {Integer[]}
+def product_except_self(nums)
+   products = [1] * (nums.length + 1)
+   res = []
+   0.upto(nums.length - 1) do |idx|
+      products[idx + 1] = products[idx] * nums[idx]
+   end
+   prod = 1
+   (nums.length - 1).downto(0) do |idx|
+    res[idx] = prod * products[idx]
+    prod *= nums[idx]
+   end
+   res
+end
+p product_except_self [1,2,3,4]

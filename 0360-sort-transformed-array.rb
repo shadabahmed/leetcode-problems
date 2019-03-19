@@ -71,6 +71,33 @@ end
 # end
 
 
+def sort_transformed_array(nums, a, b, c)
+  fn = Proc.new {|x| x * x * a + b * x + c}
+  first, last, res = 0, nums.length - 1, []
+  while first <= last
+    first_val, last_val = fn[nums[first]], fn[nums[last]]
+    if a >= 0
+      if first_val > last_val
+        res.unshift(first_val)
+        first += 1
+      else
+        res.unshift(last_val)
+        last -= 1
+      end
+    else
+      if first_val < last_val
+        res.push(first_val)
+        first += 1
+      else
+        res.push(last_val)
+        last -= 1
+      end
+    end
+  end
+  res
+end
+
+
 p sort_transformed_array nums = [-4,-2,2,4], a = 1, b = 3, c = 5
 
 p sort_transformed_array  nums = [-4,-2,2,4], a = -1, b = 3, c = 5
