@@ -65,9 +65,45 @@ def kth_smallest(root, k)
 end
 
 
+
+def kth_smallest(root, k)
+  current = root
+  while current
+    if current.left
+      prev = current.left
+      while prev.right && prev.right != current
+        prev = prev.right
+      end
+      if prev.right == current
+        prev.right = nil
+        k -= 1
+        return current.val if k.zero?
+        current = current.right
+      else
+        prev.right = current
+        current = current.left
+      end
+    else
+      k -= 1
+      return current.val if k.zero?
+      current = current.right
+    end
+  end
+  -1
+end
+
 root = TreeNode.new(3)
 root.left = TreeNode.new(1)
 root.left.right = TreeNode.new(2)
 root.right = TreeNode.new(4)
 
-p kth_smallest(root, 1)
+#p kth_smallest(root, 4)
+
+
+root = TreeNode.new(5)
+root.left = TreeNode.new(3)
+root.left.left = TreeNode.new(2)
+root.left.left.left = TreeNode.new(1)
+root.left.right = TreeNode.new(4)
+root.right = TreeNode.new(6)
+p kth_smallest(root, 4)

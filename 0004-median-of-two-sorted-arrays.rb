@@ -185,3 +185,59 @@ p find_median_sorted_arrays [1, 3, 5], [2, 4]
 p find_median_sorted_arrays [], [1]
 
 #
+
+
+
+
+# @param {Integer[]} nums1
+# @param {Integer[]} nums2
+# @return {Float}
+def find_median_sorted_arrays(nums1, nums2)
+  length = nums1.length + nums2.length
+  if length % 2 == 0
+    (find_nth_element(nums1, nums2, length/2) + find_nth_element(nums1, nums2, length/2 + 1)) / 2.0
+  else
+    find_nth_element(nums1, nums2, length/2 + 1).to_f
+  end
+end
+
+def find_nth_element(nums1, nums2, n)
+  find_nth_element_in_other(nums1, nums2, n) || find_nth_element_in_other(nums2, nums1, n)
+end
+
+def find_nth_element_in_other(nums1, nums2, n)
+  low , high = 0, nums1.length - 1
+  while low <= high
+    mid = (low + high) / 2
+    lesser_nums_in_other = get_position(nums2, nums1[mid])    
+    exact_position = mid + 1 + lesser_nums_in_other
+    return nums1[mid] if exact_position == n
+    if exact_position > n
+      high = mid - 1
+    else
+      low = mid + 1
+    end
+  end
+  nil
+end
+
+def get_position(nums, target)
+  return 0 if nums.empty?
+  low, high = 0, nums.length - 1
+  while low < high
+    mid = (low + high) / 2
+    if target >= nums[mid]
+      low = mid + 1
+    else
+      high = mid - 1
+    end
+  end
+  target >= nums[low] ? low + 1 : low
+end
+
+# p find_median_sorted_arrays [1,2], [3,4]
+# p find_median_sorted_arrays [1, 3, 5], [2, 4]
+
+# p find_median_sorted_arrays [], [1]
+p find_median_sorted_arrays [1], [1]
+#p get_position [1], 1

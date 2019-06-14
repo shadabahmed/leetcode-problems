@@ -7,3 +7,19 @@ def group_anagrams(strs)
   end
   group_map.values
 end
+
+
+
+# @param {String[]} strs
+# @return {String[][]}
+def group_anagrams(strs)
+  map = {}
+  strs.each do |str|
+    key = str.chars.sort.join
+    map[key] ||= []
+    map[key] << str
+  end    
+  map.values
+end
+
+p group_anagrams  ["eat", "tea", "tan", "ate", "nat", "bat"]

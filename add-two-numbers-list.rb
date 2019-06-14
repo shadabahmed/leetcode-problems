@@ -31,7 +31,7 @@ def add_two_numbers(l1, l2)
     carry = sum / 10
   end
 
-  while l202222
+  while l2
     sum = l2.val + carry
     l2 = l2.next
     tail.next = ListNode.new(sum % 10)

@@ -1,0 +1,30 @@
+# @param {String} s
+# @return {Boolean}
+def valid_palindrome(s)
+  0.upto(s.length - 1).any? { |idx| is_palindrome_except(s, idx) }
+end
+
+def valid_palindrome(s, low = 0, high = s.length - 1, skipped = false)
+  while low <= high
+    if s[low] != s[high]
+      return false if skipped
+      if s[low + 1] == s[high] || s[low] == s[high - 1]
+        return valid_palindrome(s, low + 1, high, true) || valid_palindrome(s, low, high - 1, true)
+      else
+        return false
+      end
+      skipped = true
+    end
+    high -= 1
+    low += 1
+  end
+  true
+end
+
+
+p valid_palindrome 'abca'
+p valid_palindrome 'kpmmmpzvenihizrwiayccqgaufyvtovmrwkoyeuiahlttaakxyoaaykpefxztwejuhzlnwzungjchoouzezkdwdyogldpbuxgjzntykajssipdohuboipzojcyviptdvdptqtzpvpspnyajqicnkwraiueguouvwcyjrfsjyeqbwhqgjjgeupjmnyvhzopnxpqwcrtwbkpjrrxdijxnvivzixruohixeekatyxsggbqdulglefrtchsonvrkfijupjoxhinekbmpqogedmwnbcirlkooxmentkkgqtlnjlvnqugxpkrxceokjqkgwckjwcbedkfnahmbzmvxhruczbpaanvembrgcuskejtncqttespmkxjlppmjdyelvsuoqwiqwqeyqpfkgrnpnureneqqbnfqbkclilinrlwfxjknfjeozoqjnhrymkkaluquqqigdrkchhtewiesnierwmrlualbpbjfbedctxgidksvuhkltfrikhxrmimprhqmrefkirflnbbnpgzpuqyvqbewvtwgzsjwpsgcvpqllavcyhfshenwscsupdyjhwijewnqrdscqzumdyoqucsnbjucieskiaayheawwwpcsqllwyfqnuczdgbcmcxrxdgjnyxiifecbquwxtfucfndnsphzgyisrdfnpmwasyrtrgugqauowwswqdevynxlpvcfrkgoqdusvrltxyarsewkwxjtlhauwiiodxuueuxajwhuqwwezqvmgganwreyuvuodjetwczepqdtigxblyvuzmiklstszkjneyrnykuayrejejszgjcgrcozgvzdqvgpvedmdwracwbpscgndpgubvhvqybggudrgspxjgydmejzmdzksgomjlkicaxtmtzlkjqyzevvjlzpolbsttpwnzidlpcvhwrfdkfokneommrlbhxqfrmiozqympnrwbdamwtpekichovprrtcnlcjmlfcvyprvkgashnbgflhddhlfgbnhsagkvrpyvcflmjclnctrrpvohcikeptwmadbwrnpmyqzoimrfqxhblrmmoenkofkdfrwhvcpldiznwpttsblopzljvvezyqjklztmtacikljmogskzdmzjemdygjxpsgrduggbyqvhvbugpdngcspbwcarwdmdevpgvqdzvgzocrgcjgzjejeryaukynryenjkzstslkimzuvylbxgitdqpezcwtejdouvuyerwnaggmvqzewwquhwjaxueuuxdoiiwuahltjxwkwesrayxtlrvsudqogkrfcvplxnyvedqwswwouaqgugrtrysawmpnfdrsiygzhpsndnfcuftxwuqbcefiixynjgdxrxcmcbgdzcunqfywllqscpwwwaehyaaikseicujbnscuqoydmuzqcsdrqnwejiwhjydpuscswnehsfhycvallqpvcgspwjszgwtvwebqvyqupzgpnbbnlfrikfermqhrpmimrxhkirftlkhuvskdigxtcdebfjbpblaulrmwreinseiwethhckrdgiqququlakkmyrhnjqozoejfnkjxfwlrnililckbqfnbqqenerunpnrgkfpqyeqwqiwqousvleydjmppljxkmpsettqcntjeksucgrbmevnaapbzcurhxvmzbmhanfkdebcwjkcwgkqjkoecxrkpxguqnvljnltqgkktnemxooklricbnwmdegoqpmbkenihxojpujifkrvnoshctrfelgludqbggsxytakeexihourxizvivnxjidxrrjpkbwtrcwqpxnpozhvynmjpuegjjgqhwbqeyjsfrjycwvuougeuiarwknciqjaynpspvpztqtpdvdtpivycjozpiobuhodpissjakytnzjgxubpdlgoydwdkzezuoohcjgnuzwnlzhujewtzxfepkyaaoyxkaattlhaiueyokwrmvotvyfuagqccyaiwrzihinevzpmmmpk'
+p valid_palindrome 'pap'
+p valid_palindrome "abc"
+
+p valid_palindrome "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga"

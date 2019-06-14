@@ -46,7 +46,7 @@ def inorder_morris(root)
   while cur
     if cur.left
       pred = cur.left
-      while pred && pred.right && pred.right != cur
+      while pred.right && pred.right != cur
         pred = pred.right
       end
       if pred.right == cur
@@ -55,7 +55,7 @@ def inorder_morris(root)
         cur = cur.right
       else
         pred.right = cur
-        cur = cur.left if cur.left
+        cur = cur.left
       end
     else
       puts cur.val
